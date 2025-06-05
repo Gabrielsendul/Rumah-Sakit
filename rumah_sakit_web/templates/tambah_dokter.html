@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Tambah Dokter{% endblock %}
+{% block content %}
+<h2>Tambah Dokter</h2>
+<form method="post">
+  <div class="mb-3">
+    <label for="nama" class="form-label">Nama Dokter</label>
+    <input type="text" class="form-control" id="nama" name="nama" required />
+  </div>
+  <div class="mb-3">
+    <label for="spesialis" class="form-label">Spesialis</label>
+    <input type="text" class="form-control" id="spesialis" name="spesialis" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Simpan</button>
+  <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+</form>
+{% endblock %}

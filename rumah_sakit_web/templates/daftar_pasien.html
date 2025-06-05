@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Daftar Pasien - {{ dokter.nama }}{% endblock %}
+{% block content %}
+<h2>Dokter: {{ dokter.nama }} ({{ dokter.spesialis }})</h2>
+
+<h4>Antrian Pasien</h4>
+{% if pasien_list %}
+  <a href="{{ url_for('panggil_pasien', nama_dokter=dokter.nama) }}" class="btn btn-warning mb-4">Panggil Pasien Berikutnya</a>
+{% endif %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama Pasien</th>
+      <th>Usia</th>
+      <th>Pekerjaan</th>
+      <th>Keluhan</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pasien in pasien_list %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ pasien.nama_pasien }}</td>
+      <td>{{ pasien.usia }}</td>
+      <td>{{ pasien.pekerjaan }}</td>
+      <td>{{ pasien.keluhan }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="text-center">Belum ada pasien dalam antrian</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h4>Daftar Pasien Baru</h4>
+<form method="post">
+  <div class="mb-3">
+    <label for="nama_pasien" class="form-label">Nama Pasien</label>
+    <input type="text" class="form-control" id="nama_pasien" name="nama_pasien" required />
+  </div>
+  <div class="mb-3">
+    <label for="usia" class="form-label">Usia</label>
+    <input type="number" class="form-control" id="usia" name="usia" required />
+  </div>
+  <div class="mb-3">
+    <label for="pekerjaan" class="form-label">Pekerjaan</label>
+    <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" required />
+  </div>
+  <div class="mb-3">
+    <label for="keluhan" class="form-label">Keluhan</label>
+    <input type="text" class="form-control" id="keluhan" name="keluhan" required />
+  </div>
+  <button type="submit" class="btn btn-success">Daftar</button>
+  <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+</form>
+{% endblock %}

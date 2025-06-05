@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Daftar Dokter{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Daftar Dokter</h2>
+  <a href="{{ url_for('tambah_dokter') }}" class="btn btn-success">+ Tambah Dokter</a>
+</div>
+
+{% if dokter_list %}
+  <div class="row">
+    {% for dokter in dokter_list %}
+      <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ dokter.nama }}</h5>
+            <p class="card-text text-muted">{{ dokter.spesialis }}</p>
+            <a href="{{ url_for('daftar_pasien', nama_dokter=dokter.nama) }}" class="btn btn-primary btn-sm">Lihat Antrian</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info text-center">Belum ada dokter yang ditambahkan.</div>
+{% endif %}
+{% endblock %}
